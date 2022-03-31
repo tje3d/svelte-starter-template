@@ -1,0 +1,12 @@
+@tailwind base;
+
+@import './base/body.scss';
+@import './base/global.scss';
+@import './base/fonts.scss';
+@import './base/scrollbar.scss';
+
+@tailwind components;
+
+@import './components/form.scss';
+
+@tailwind utilities;
