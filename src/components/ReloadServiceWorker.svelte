@@ -1,7 +1,7 @@
 <script lang="ts">
   import { useRegisterSW } from 'virtual:pwa-register/svelte'
 
-  const intervalMS = 5 * 1000
+  const intervalMS = 60 * 1000
   const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
     onRegistered(swr) {
       console.log(`SW registered: ${swr}`)

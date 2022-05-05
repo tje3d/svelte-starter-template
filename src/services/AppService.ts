@@ -1,4 +1,4 @@
-import { get, Readable, readable } from 'svelte/store'
+import { get, readable, type Readable } from 'svelte/store'
 import { Service } from 'typedi'
 import { AppBloc } from '../bloc/app/AppBloc'
 import { AppState } from '../bloc/app/AppState'

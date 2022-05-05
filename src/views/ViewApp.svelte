@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fly, scale } from 'svelte/transition'
+  import { fly,scale } from 'svelte/transition'
   import bg from '../assets/img/discord-bg.svg?raw'
   import Icon from '../components/Icon.svelte'
   import focus from '../directives/Focus'
