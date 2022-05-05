@@ -1,23 +1,34 @@
 <script lang="ts">
-  import { fly,scale } from 'svelte/transition'
-  import bg from '../assets/img/discord-bg.svg?raw'
+  import { onDestroy } from 'svelte'
+  import { fly, scale } from 'svelte/transition'
+  import Container from 'typedi'
   import Icon from '../components/Icon.svelte'
   import focus from '../directives/Focus'
-</script>
+  import AppService from '../services/AppService'
+  import ThemeService from '../services/ThemeService'
 
-{@html bg}
+  const themeService = Container.get(ThemeService)
+
+  function toggleTheme() {
+    themeService.toggle()
+  }
+
+  onDestroy(function () {
+    Container.get(AppService).destroy()
+  })
+</script>
 
 <div
   class="min-h-screen py-6 sm:flex flex-col justify-center sm:py-12 fixed z-50 inset-0 overflow-y-auto h-full w-full px-4"
 >
   <div in:fly={{ delay: 250, duration: 450, y: -20 }}>
-    <h1 class="text-center text-white text-4xl mb-1">
+    <h1 class="text-center text-4xl mb-1">
       <div class="w-6 h-6 inline-block">
         <Icon name="user" />
       </div>
       ایجاد اکانت
     </h1>
-    <h1 class="text-center text-white text-opacity-75 text-sm mb-4">
+    <h1 class="text-center opacity-75 text-sm mb-4">
       لطفا اطلاعات شخصی خود را بصورت کامل وارد نمایید
     </h1>
   </div>
@@ -142,6 +153,10 @@
         >
       </div>
     </div>
-    <button type="submit" class="btn-primary">ثبت نام</button>
+    <button
+      type="submit"
+      class="btn-primary"
+      on:click|preventDefault={toggleTheme}>ثبت نام</button
+    >
   </form>
 </div>

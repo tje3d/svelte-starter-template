@@ -1,9 +1,10 @@
 import { get, readable, type Readable } from 'svelte/store'
-import { Service } from 'typedi'
+import Container, { Service } from 'typedi'
 import { AppBloc } from '../bloc/app/AppBloc'
 import { AppState } from '../bloc/app/AppState'
 import { safeInterval } from '../helpers/timers'
 import BaseService from './Base'
+import ThemeService from './ThemeService'
 
 @Service()
 export default class AppService extends BaseService {
@@ -30,7 +31,7 @@ export default class AppService extends BaseService {
   }
 
   async destroy() {
-    // ...
+    Container.get(ThemeService).destroy()
   }
 
   //
