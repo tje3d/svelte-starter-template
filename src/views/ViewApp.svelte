@@ -1,9 +1,9 @@
 <script lang="ts">
   import { fly, scale } from 'svelte/transition'
   import Container from 'typedi'
-  import Icon from '../components/Icon.svelte'
   import focus from '../directives/Focus'
   import ThemeService from '../services/ThemeService'
+  import IconPerson from '~icons/mdi/person-circle'
 
   const themeService = Container.get(ThemeService)
 
@@ -17,8 +17,8 @@
 >
   <div in:fly={{ delay: 250, duration: 450, y: -20 }}>
     <h1 class="text-center text-4xl mb-1">
-      <div class="w-6 h-6 inline-block">
-        <Icon name="user" />
+      <div class="w-8 h-8 inline-block align-middle">
+        <IconPerson />
       </div>
       ایجاد اکانت
     </h1>
