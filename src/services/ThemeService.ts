@@ -1,49 +1,29 @@
 import { get, writable, type Writable } from 'svelte/store'
 import { Service } from 'typedi'
-import ColorsDark from '../assets/colors/dark'
-import ColorsLight from '../assets/colors/light'
 import BaseService from './Base'
 
 @Service()
 export default class ThemeService extends BaseService {
-  transitionStyle?: HTMLStyleElement
-  style?: HTMLStyleElement
-
   defaultTheme: Themes = 'light'
   theme: Writable<Themes> = writable(this.defaultTheme)
-
-  timeoutClearTrans?: NodeJS.Timeout
 
   async init() {
     if (get(this.initialized)) {
       return
     }
 
-    this.transitionStyle = document.createElement('style')
-    this.transitionStyle.setAttribute('type', 'text/css')
-    document.head.appendChild(this.transitionStyle)
+    const theme = await this.loadTheme()
 
-    this.style = document.createElement('style')
-    this.style.setAttribute('type', 'text/css')
-    document.head.appendChild(this.style)
-
-    this.theme.set(this.loadTheme())
+    // Feed service variables
+    this.theme.set(theme)
 
     // Apply theme
-    this.applyByName(get(this.theme), true)
+    await this.set(theme)
 
     this.initialized.set(true)
   }
 
   async destroy() {
-    if (this.transitionStyle) {
-      document.head.removeChild(this.transitionStyle)
-    }
-
-    if (this.style) {
-      document.head.removeChild(this.style)
-    }
-
     for (const key in this) {
       delete this[key]
     }
@@ -51,9 +31,9 @@ export default class ThemeService extends BaseService {
 
   /**
    * Load theme from storage
-   * @returns Themes
+   * @returns Promise<Themes>
    */
-  loadTheme(): Themes {
+  async loadTheme(): Promise<Themes> {
     return (localStorage.getItem('theme') || this.defaultTheme) === 'light'
       ? 'light'
       : 'dark'
@@ -62,8 +42,9 @@ export default class ThemeService extends BaseService {
   /**
    * Save theme to storage
    * @param theme Themes
+   * @returns Promise<void>
    */
-  saveTheme(theme: Themes) {
+  async saveTheme(theme: Themes) {
     localStorage.setItem('theme', theme)
   }
 
@@ -72,70 +53,46 @@ export default class ThemeService extends BaseService {
   //
 
   /**
-   * Turn an object to css variables
-   * @param input object
+   * Set active theme and save if already initialized
+   * @param theme Themes
+   * @returns Promise<void>
    */
-  apply(theme: Themes, input: object, isInitial: boolean) {
-    if (!isInitial) {
-      this.theme.set(theme)
+  async set(theme: Themes) {
+    this.theme.set(theme)
+
+    document.documentElement.className = theme
+
+    if (get(this.initialized)) {
       this.saveTheme(theme)
-
-      if (!this.transitionStyle.firstChild) {
-        this.transitionStyle.appendChild(
-          document.createTextNode('* {transition: background-color ease 0.3s}'),
-        )
-      }
-
-      if (this.timeoutClearTrans) {
-        clearTimeout(this.timeoutClearTrans)
-      }
-
-      this.timeoutClearTrans = setTimeout(() => {
-        if (this.transitionStyle.firstChild) {
-          this.transitionStyle.removeChild(this.transitionStyle.firstChild)
-        }
-      }, 350)
     }
-
-    const variables = Object.entries(input).map(function (item) {
-      return `--${item[0]}: ${item[1]};`
-    })
-
-    if (this.style.firstChild) {
-      this.style.removeChild(this.style.firstChild)
-    }
-
-    this.style.appendChild(
-      document.createTextNode(`body {${variables.join('')}}`),
-    )
   }
 
   /**
    * Apply Dark Theme
    * @returns Promise<void>
    */
-  async dark(isInitial: boolean = false) {
-    return this.apply('dark', ColorsDark, isInitial)
+  async dark() {
+    return this.set('dark')
   }
 
   /**
    * Apply Light Theme
    * @returns Promise<void>
    */
-  async light(isInitial: boolean = false) {
-    return this.apply('light', ColorsLight, isInitial)
+  async light() {
+    return this.set('light')
   }
 
   /**
    * Apply theme by name
    * @param name Themes
    */
-  async applyByName(name: Themes, isInitial: boolean) {
+  async applyByName(name: Themes) {
     switch (name) {
       case 'light':
-        return this.light(isInitial)
+        return this.light()
       case 'dark':
-        return this.dark(isInitial)
+        return this.dark()
     }
   }
 

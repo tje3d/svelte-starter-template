@@ -2,8 +2,16 @@ body,
 html {
   width: 100%;
   height: 100%;
-  background-color: var(--body-bg);
-  color: var(--body-text);
+}
+
+html.dark, html.dark body {
+  background-color: #141b2d;
+  color: #ececec;
+}
+
+html.light, html.light body {
+  background-color: rgb(240, 240, 240);
+  color: #222222;
 }
 
 #app {

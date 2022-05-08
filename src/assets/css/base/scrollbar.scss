@@ -7,20 +7,25 @@
   background: transparent;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--scroll-bg);
+html.light ::-webkit-scrollbar-thumb,
+html.dark ::-webkit-scrollbar-thumb {
+  background: #0dd6b8;
   border-radius: 20px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+html.light ::-webkit-scrollbar-thumb:hover,
+html.dark ::-webkit-scrollbar-thumb:hover {
   background: #0bc1a6;
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--scroll-bg) transparent;
+html.light,
+html.dark {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #0dd6b8 transparent;
 
-  &:hover {
-    scrollbar-color: var(--scroll-bg-hover) transparent;
+    &:hover {
+      scrollbar-color: #0bc1a6 transparent;
+    }
   }
 }
