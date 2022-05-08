@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte'
   import { fly, scale } from 'svelte/transition'
   import Container from 'typedi'
   import Icon from '../components/Icon.svelte'
   import focus from '../directives/Focus'
-  import AppService from '../services/AppService'
   import ThemeService from '../services/ThemeService'
 
   const themeService = Container.get(ThemeService)
@@ -12,10 +10,6 @@
   function toggleTheme() {
     themeService.toggle()
   }
-
-  onDestroy(function () {
-    Container.get(AppService).destroy()
-  })
 </script>
 
 <div

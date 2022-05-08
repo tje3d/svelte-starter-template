@@ -23,12 +23,6 @@ export default class ThemeService extends BaseService {
     this.initialized.set(true)
   }
 
-  async destroy() {
-    for (const key in this) {
-      delete this[key]
-    }
-  }
-
   /**
    * Load theme from storage
    * @returns Promise<Themes>

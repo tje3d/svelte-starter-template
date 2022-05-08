@@ -1,10 +1,9 @@
 import { get, readable, type Readable } from 'svelte/store'
-import Container, { Service } from 'typedi'
+import { Service } from 'typedi'
 import { AppBloc } from '../bloc/app/AppBloc'
 import { AppState } from '../bloc/app/AppState'
 import { safeInterval } from '../helpers/timers'
 import BaseService from './Base'
-import ThemeService from './ThemeService'
 
 @Service()
 export default class AppService extends BaseService {
@@ -15,7 +14,6 @@ export default class AppService extends BaseService {
     super()
 
     this.init = this.init.bind(this)
-    this.destroy = this.destroy.bind(this)
     this._calculateCurrentTime = this._calculateCurrentTime.bind(this)
   }
 
@@ -28,10 +26,6 @@ export default class AppService extends BaseService {
     this.appBloc = new AppBloc(AppState.new())
 
     this.initialized.set(true)
-  }
-
-  async destroy() {
-    Container.get(ThemeService).destroy()
   }
 
   //
