@@ -1,8 +1,8 @@
 import 'reflect-metadata'
 import './assets/css/main.scss'
-import ViewLoader from './views/ViewLoader.svelte'
+import LoaderView from './views/LoaderView.svelte'
 
-const app = new ViewLoader({
+const app = new LoaderView({
   target: document.getElementById('app'),
 })
 

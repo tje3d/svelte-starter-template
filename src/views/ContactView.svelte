@@ -1,4 +1,15 @@
 <script lang="ts">
+  import { meta, router } from 'tinro'
+
+  const route = meta()
+
+  function back() {
+    if (!route.from) {
+      router.goto('/home')
+    } else {
+      history.back()
+    }
+  }
 </script>
 
 <div
@@ -10,9 +21,10 @@
     <h1 class="text-4xl mb-8">ارتباط با ما</h1>
 
     <a
-      href="/home"
+      href="/"
       class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      type="button">برگرد به خانه</a
+      type="button"
+      on:click|preventDefault={back}>برگرد به خانه</a
     >
   </div>
 </div>

@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
   import ReloadServiceWorker from '../components/ReloadServiceWorker.svelte'
   import loaders from '../loaders'
-  import First from './ViewFirst.svelte'
+  import FirstView from './FirstView.svelte'
 
   let isLoading = true
 
@@ -20,5 +20,5 @@
 {/if}
 
 {#if !isLoading}
-  <First />
+  <FirstView />
 {/if}

@@ -2,6 +2,7 @@
   import { active, Route } from 'tinro'
   import Container from 'typedi'
   import ThemeService from '../services/ThemeService'
+  import TimelineTabView from './TimelineTabView.svelte'
 
   const themeService = Container.get(ThemeService)
 
@@ -10,11 +11,9 @@
   }
 </script>
 
-<div
-  class="min-h-screen py-6 sm:flex flex-col justify-center sm:py-12 fixed z-50 inset-0 overflow-y-auto h-full w-full px-4"
->
+<div class="py-4">
   <div
-    class="bg-white dark:bg-[#1f2940] backdrop-blur-lg mx-auto w-full lg:w-[54rem] rounded shadow-xl"
+    class="bg-white dark:bg-[#1f2940] backdrop-blur-lg mx-auto w-full lg:w-[54rem] rounded shadow-xl max-h-[calc(100vh-2rem)] overflow-hidden"
   >
     <div class="border-b border-gray-200 dark:border-gray-700">
       <ul
@@ -32,7 +31,7 @@
                 d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
                 clip-rule="evenodd"
               /></svg
-            >پروفایل
+            >تایم لاین
           </a>
         </li>
         <li class="ml-2 tab__item">
@@ -80,7 +79,7 @@
     </div>
 
     <Route path="/tab1">
-      <div class="py-10 px-8">Tab1</div>
+      <TimelineTabView />
     </Route>
     <Route path="/tab2">
       <div class="py-10 px-8">Tab2</div>
