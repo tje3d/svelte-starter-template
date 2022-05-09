@@ -6,6 +6,7 @@
   import IconSetting from '~icons/mdi/tune-vertical'
   import IconDashboard from '~icons/mdi/view-dashboard'
   import ThemeService from '../services/ThemeService'
+  import TimelineTabView from './TimelineTabView.svelte'
 
   const themeService = Container.get(ThemeService)
 
@@ -50,11 +51,7 @@
     </div>
 
     <Route path="/tab1">
-      {#await import('./TimelineTabView.svelte')}
-        <div class="py-10 px-8">Loading...</div>
-      {:then cmp}
-        <svelte:component this={cmp.default} />
-      {/await}
+      <TimelineTabView />
     </Route>
     <Route path="/tab2">
       <div class="py-10 px-8">Tab2</div>
