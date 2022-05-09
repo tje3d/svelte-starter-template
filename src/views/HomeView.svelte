@@ -2,7 +2,6 @@
   import { active, Route } from 'tinro'
   import Container from 'typedi'
   import ThemeService from '../services/ThemeService'
-  import TimelineTabView from './TimelineTabView.svelte'
 
   const themeService = Container.get(ThemeService)
 
@@ -79,7 +78,11 @@
     </div>
 
     <Route path="/tab1">
-      <TimelineTabView />
+      {#await import('./TimelineTabView.svelte')}
+        <div class="py-10 px-8">Loading...</div>
+      {:then cmp}
+        <svelte:component this={cmp.default} />
+      {/await}
     </Route>
     <Route path="/tab2">
       <div class="py-10 px-8">Tab2</div>
