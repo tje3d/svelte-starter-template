@@ -4,12 +4,22 @@ html {
   height: 100%;
 }
 
-html.dark, html.dark body {
+html.dark {
+  color-scheme: 'dark';
+}
+
+html.dark,
+html.dark body {
   background-color: #141b2d;
   color: #ececec;
 }
 
-html.light, html.light body {
+html.light {
+  color-scheme: 'light';
+}
+
+html.light,
+html.light body {
   background-color: rgb(240, 240, 240);
   color: #222222;
 }
