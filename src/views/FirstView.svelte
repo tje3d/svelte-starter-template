@@ -3,6 +3,7 @@
   import ContactView from './ContactView.svelte'
   import HomeView from './HomeView.svelte'
   import LoginView from './LoginView.svelte'
+  import LogoutView from './LogoutView.svelte'
   import NotFoundView from './NotFoundView.svelte'
   import SignupView from './SignupView.svelte'
 
@@ -15,6 +16,7 @@
 
   <Route path="/login"><LoginView /></Route>
   <Route path="/signup"><SignupView /></Route>
+  <Route path="/logout"><LogoutView /></Route>
   <Route path="/home/*"><HomeView /></Route>
   <Route path="/contact"><ContactView /></Route>
 
