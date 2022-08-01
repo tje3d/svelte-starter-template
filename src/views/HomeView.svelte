@@ -1,10 +1,10 @@
 <script lang="ts">
   import { active, Route } from 'tinro'
   import Container from 'typedi'
-  import IconAccountCircle from '~icons/ic/round-account-circle'
-  import IconContact from '~icons/ic/round-perm-contact-calendar'
   import IconSetting from '~icons/ic/baseline-settings-input-composite'
+  import IconAccountCircle from '~icons/ic/round-account-circle'
   import IconDashboard from '~icons/ic/round-dashboard'
+  import IconContact from '~icons/ic/round-perm-contact-calendar'
   import ThemeService from '../services/ThemeService'
   import TimelineTabView from './TimelineTabView.svelte'
 
