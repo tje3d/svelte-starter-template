@@ -37,6 +37,7 @@
     "lodash": "^4.17.21",
     "svelte": "^3.48.0",
     "svelte-tiny-virtual-list": "^2.0.3",
-    "tinro": "^0.6.12"
+    "tinro": "^0.6.12",
+    "yup": "^0.32.11"
   }
 }
